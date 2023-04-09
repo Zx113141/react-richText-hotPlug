@@ -1,9 +1,6 @@
 import Font from '../../tools/fontsize'
 import React, { ReactElement, useContext, useCallback } from 'react';
 import { install } from '@/core/share/install';
-import { observe } from '@/core/share/observe';
-import { dispatchToolsValue } from '@/core/share/dispatch';
-import { globalContext } from '../../context/context';
 
 
 interface toolsProps {
@@ -13,26 +10,19 @@ interface toolsProps {
 
 
 const Toolbox = (props: toolsProps) => {
-
     const { tools, children } = props
-    const global = useContext(globalContext)
     // 根据tools 进行组件注册
     const ToolElement = install(tools)
-    // 组件方法, 依赖收集
+    // 组件方法, 统一修改
     const change = (type: string, value: any) => {
-        console.log(global)
-        dispatchToolsValue({
-            type,
-            value,
-            isGlobal: global.isGlobalSelect
-        })
+        document.execCommand('color',false, 'font-size:20px')
     }
-
+    // 获取TextEditor的焦点
 
     // 热插拔Tools
     return (
         <>
-            <div>
+            <div style={{marginBottom:100}}>
                 <ToolElement change={(type: string, value: any) => change(type, value)}></ToolElement>
             </div>
             {children}
@@ -41,4 +31,4 @@ const Toolbox = (props: toolsProps) => {
 }
 
 
-export default Toolbox
+export default (Toolbox)

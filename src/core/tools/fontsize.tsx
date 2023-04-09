@@ -1,5 +1,5 @@
 import { SearchOutlined } from '@ant-design/icons';
-import { Select, } from 'antd';
+import { Select, Button} from 'antd';
 
 const FontSize = (props: any) => {
     const { change,type } = props
@@ -18,13 +18,14 @@ const FontSize = (props: any) => {
         },
     ]
     return (
-        <Select
-            style={{ width: 120 }}
-            defaultValue={16}
-            bordered={false}
-            onSelect={(key,) => change(type, key)}
-            options={options}
-        />
+        // <Select
+        //     style={{ width: 120 }}
+        //     defaultValue={16}
+        //     bordered={false}
+        //     onSelect={(key,) => change(type, key)}
+        //     options={options}
+        // />
+        <Button onClick={() => change(type, 10)}>20像素</Button>
     )
 }
 export default FontSize
