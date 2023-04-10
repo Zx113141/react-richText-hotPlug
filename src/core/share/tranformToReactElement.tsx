@@ -1,5 +1,5 @@
 import { CSSProperties } from "react"
-
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 interface NodeProps {
     type:string,
     innerText:string
@@ -26,24 +26,7 @@ const data = {
 }
 
 export const transformToNode = (nodeStr:string,selectText?:string) => {
-    return data 
+    // 解析html标签，style
+    // const html = '<div>Example HTML string</div>';
+    return ReactHtmlParser(nodeStr + '<span></span>') 
 }
-
-
-export const transformToString = (node:HTMLElement) => {
-
-}
-
-// const Transform = (props) => {
-//     const {nodeStr} = props
-//     console.log(nodeStr)
-//     document.createElement(nodeStr)
-//     return (
-//         <>
-            
-//         </>
-//     )
-// }
-
-// export default Transform
-// defalut Data

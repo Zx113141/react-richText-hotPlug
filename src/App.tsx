@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { createEditor } from './core'
 import './app.module.less'
 function App() {
@@ -6,11 +6,13 @@ function App() {
     edit: {
       mode: '',
       disabled: false,
-    }
+
+    },
+    defaultValue: "<div style='color:red;font-size:20px;'>ddd</div>"
   }
   const XRichText = createEditor({
     edit: {
-      font:['fontSize']
+      font: ['fontSize']
     }
   })
   return (

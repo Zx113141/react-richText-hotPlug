@@ -1,5 +1,5 @@
 import { test, expect } from "vitest"
-import { transformToNode } from "@/core/share/tranformHTML"
+import { transformToNode } from "@/core/share/tranformToReactElement"
 
 test('textNode', () => {
     const code = 'asdasdkgjflkd'

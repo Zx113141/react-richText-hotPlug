@@ -1,35 +1,30 @@
-import React, { useContext } from 'react';
+
 import Toolbox from '../component/tools/Toolbox';
 import TextContainer from '../component/editor/Textarea'
-import { transformToNode } from './tranformHTML';
 import { _ as lodash } from 'lodash'
 import { observer, useLocalStore } from 'mobx-react-lite';
-import { TextContext, ToolboxContext } from '../context/context';
-import { Button } from 'antd';
+import Text from '../store/text';
+import Tools from '../store/tools';
+import { transformToNode } from './tranformToReactElement';
+
 
 export const createEditor: any = (toolOptions: any) => {
-    const selectText = (value: string) => {
-
-    }
     const inputText = (value: string) => {
 
         // console.log(transformToNode(value))
     }
-    
-    const setColor = () => {
-        document.execCommand('fontSize', true, '3px');
-    }
-    return observer(function TextProvider(props) {
+    return observer(function TextProvider(props:any) {
         // 注册Tools工具，依赖收集，根据toolOptions创建字段，监听第三方库字段
         const options = lodash.cloneDeep(toolOptions)
-        // console.log(options)
+        const defaultValue = transformToNode(props.defaultValue)
+        // 编译props内部默认值再传入编辑器
         const tools = useLocalStore(() => {
             return {
                 options,
                 get getOptions() {
                     return options
                 },
-                handleOptions(key:string,value:any,partten?:string) {
+                handleOptions(key: string, value: any, partten?: string) {
                     // if (partten) {
                     //     for (let key)
                     // }
@@ -37,16 +32,16 @@ export const createEditor: any = (toolOptions: any) => {
             }
         })
         return (
-
-            <ToolboxContext.Provider value={tools}>
-                <Toolbox tools={toolOptions}>
-                    <TextContext.Provider value={null}>
-                        <TextContainer {...props} onSelect={(val: string) => selectText(val)} onInput={(value: string) => inputText(value)}>
+            <Text>
+                <Tools >
+                    <Toolbox tools={toolOptions}>
+                        <TextContainer  {...props.edit} defaultValue={defaultValue}>
 
                         </TextContainer>
-                    </TextContext.Provider>
-                </Toolbox>
-            </ToolboxContext.Provider>
+                    </Toolbox>
+                </Tools>
+            </Text>
+
 
         )
     })
